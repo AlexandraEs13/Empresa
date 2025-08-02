@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Tienda de Ropa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .product-card:hover { transform: translateY(-4px); }
+        .category-btn.active { background-color: #1f2937; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">StyleHub</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="showSection('hombre')" class="section-btn text-gray-700 hover:text-gray-900 font-medium">Hombre</button>
+                    <button onclick="showSection('mujer')" class="section-btn text-gray-700 hover:text-gray-900 font-medium">Mujer</button>
+                    <button onclick="showCart()" class="text-gray-700 hover:text-gray-900 font-medium">Carrito (<span id="cart-count">0</span>)</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Moda Minimalista</h2>
+            <p class="text-xl text-gray-600 mb-8">Descubre nuestra colección de ropa elegante y moderna</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="showSection('hombre')" class="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors">Comprar Hombre</button>
+                <button onclick="showSection('mujer')" class="border border-gray-900 text-gray-900 px-8 py-3 rounded-lg hover:bg-gray-900 hover:text-white transition-colors">Comprar Mujer</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Hombre -->
+    <section id="hombre-section" class="hidden py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Ropa para Hombre</h2>
+            
+            <!-- Filtros de categoría -->
+            <div class="flex justify-center mb-8">
+                <div class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+                    <button onclick="filterCategory('hombre', 'todos')" class="category-btn active px-4 py-2 rounded-md transition-colors">Todos</button>
+                    <button onclick="filterCategory('hombre', 'camisas')" class="category-btn px-4 py-2 rounded-md transition-colors">Camisas</button>
+                    <button onclick="filterCategory('hombre', 'pantalones')" class="category-btn px-4 py-2 rounded-md transition-colors">Pantalones</button>
+                    <button onclick="filterCategory('hombre', 'chaquetas')" class="category-btn px-4 py-2 rounded-md transition-colors">Chaquetas</button>
+                </div>
+            </div>
+
+            <!-- Productos Hombre -->
+            <div id="hombre-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Camisas -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="camisas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👔</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Camisa Clásica Blanca</h3>
+                        <p class="text-gray-600 text-sm mb-3">Camisa de algodón premium, corte regular</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$89.900</span>
+                            <button onclick="addToCart('Camisa Clásica Blanca', 89900, 'hombre')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="camisas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👕</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Camisa Casual Azul</h3>
+                        <p class="text-gray-600 text-sm mb-3">Camisa de lino, perfecta para el día a día</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$75.900</span>
+                            <button onclick="addToCart('Camisa Casual Azul', 75900, 'hombre')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pantalones -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="pantalones">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👖</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Jeans Slim Fit</h3>
+                        <p class="text-gray-600 text-sm mb-3">Jeans de mezclilla premium, corte moderno</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$125.900</span>
+                            <button onclick="addToCart('Jeans Slim Fit', 125900, 'hombre')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="pantalones">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">🩳</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Pantalón Chino</h3>
+                        <p class="text-gray-600 text-sm mb-3">Pantalón elegante para ocasiones formales</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$95.900</span>
+                            <button onclick="addToCart('Pantalón Chino', 95900, 'hombre')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chaquetas -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="chaquetas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">🧥</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Chaqueta de Cuero</h3>
+                        <p class="text-gray-600 text-sm mb-3">Chaqueta de cuero genuino, estilo clásico</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$299.900</span>
+                            <button onclick="addToCart('Chaqueta de Cuero', 299900, 'hombre')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="chaquetas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">🧥</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Blazer Formal</h3>
+                        <p class="text-gray-600 text-sm mb-3">Blazer elegante para eventos especiales</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$189.900</span>
+                            <button onclick="addToCart('Blazer Formal', 189900, 'hombre')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Mujer -->
+    <section id="mujer-section" class="hidden py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Ropa para Mujer</h2>
+            
+            <!-- Filtros de categoría -->
+            <div class="flex justify-center mb-8">
+                <div class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+                    <button onclick="filterCategory('mujer', 'todos')" class="category-btn active px-4 py-2 rounded-md transition-colors">Todos</button>
+                    <button onclick="filterCategory('mujer', 'blusas')" class="category-btn px-4 py-2 rounded-md transition-colors">Blusas</button>
+                    <button onclick="filterCategory('mujer', 'pantalones')" class="category-btn px-4 py-2 rounded-md transition-colors">Pantalones</button>
+                    <button onclick="filterCategory('mujer', 'vestidos')" class="category-btn px-4 py-2 rounded-md transition-colors">Vestidos</button>
+                    <button onclick="filterCategory('mujer', 'sudaderas')" class="category-btn px-4 py-2 rounded-md transition-colors">Sudaderas</button>
+                </div>
+            </div>
+
+            <!-- Productos Mujer -->
+            <div id="mujer-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Blusas -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="blusas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👚</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Blusa Elegante</h3>
+                        <p class="text-gray-600 text-sm mb-3">Blusa de seda con detalles únicos</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$79.900</span>
+                            <button onclick="addToCart('Blusa Elegante', 79900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="blusas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👕</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Camiseta Básica</h3>
+                        <p class="text-gray-600 text-sm mb-3">Camiseta de algodón orgánico</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$45.900</span>
+                            <button onclick="addToCart('Camiseta Básica', 45900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pantalones -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="pantalones">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👖</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Jeans Skinny</h3>
+                        <p class="text-gray-600 text-sm mb-3">Jeans de tiro alto, corte moderno</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$115.900</span>
+                            <button onclick="addToCart('Jeans Skinny', 115900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="pantalones">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">🩱</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Pantalón Palazzo</h3>
+                        <p class="text-gray-600 text-sm mb-3">Pantalón amplio y cómodo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$89.900</span>
+                            <button onclick="addToCart('Pantalón Palazzo', 89900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vestidos -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="vestidos">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👗</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Vestido Casual</h3>
+                        <p class="text-gray-600 text-sm mb-3">Vestido midi perfecto para el día</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$135.900</span>
+                            <button onclick="addToCart('Vestido Casual', 135900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="vestidos">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">👗</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Vestido de Noche</h3>
+                        <p class="text-gray-600 text-sm mb-3">Vestido elegante para ocasiones especiales</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$249.900</span>
+                            <button onclick="addToCart('Vestido de Noche', 249900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sudaderas -->
+                <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition-transform duration-300" data-category="sudaderas">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center overflow-hidden">
+                        <img src="Imagenes/Mujer/Pantalon/sudadera_flores.png" alt="Sudadera con Flores" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Sudadera con Flores</h3>
+                        <p class="text-gray-600 text-sm mb-3">Sudadera cómoda con diseño floral único</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">$95.900</span>
+                            <button onclick="addToCart('Sudadera con Flores', 95900, 'mujer')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal del Carrito -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg max-w-md w-full mx-4 max-h-96 overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Carrito de Compras</h3>
+                    <button onclick="closeCart()" class="text-gray-500 hover:text-gray-700">✕</button>
+                </div>
+                <div id="cart-items" class="space-y-3 mb-4">
+                    <!-- Los items del carrito se mostrarán aquí -->
+                </div>
+                <div class="border-t pt-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-bold">Total: $<span id="cart-total">0</span></span>
+                    </div>
+                    <button onclick="sendToWhatsApp()" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Enviar Pedido por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">StyleHub</h3>
+                    <p class="text-gray-400">Tu tienda de moda minimalista y elegante</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+                    <p class="text-gray-400">WhatsApp: +57 321 376 5854</p>
+                    <p class="text-gray-400">Email: info@stylehub.com</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+                    <p class="text-gray-400">Instagram: @stylehub</p>
+                    <p class="text-gray-400">Facebook: StyleHub</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 StyleHub. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

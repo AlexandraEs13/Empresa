@@ -1,0 +1,25 @@
+# Archivos Python innecesarios
+app.py
+requirements.txt
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos batch innecesarios
+run.bat
+run-vercel.bat
+
+# Carpetas de desarrollo
+pedidos/
+node_modules/
+.vercel/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
